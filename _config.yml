@@ -1,5 +1,17 @@
 title: OS Coursework Journal
 description: Linux Server Administration - 7 Week Technical Journal
-remote_theme: pages-themes/dinky@v0.2.0
+theme: minima
+baseurl: "/OS_Coursework"
+url: "https://dipkumar0001.github.io"
+
+# Build settings
+markdown: kramdown
 plugins:
-  - jekyll-remote-theme
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
