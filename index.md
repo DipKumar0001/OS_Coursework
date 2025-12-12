@@ -1,6 +1,6 @@
 # Operating System Coursework Journal
 
-**Student:** Dipesh  
+**StudentID:** A00038176
 **Distribution:** Ubuntu Server 24.04 LTS
 
 ---
