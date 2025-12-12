@@ -9,29 +9,7 @@ This week I set up the basic foundation for my Linux server project. The main go
 
 Here's how my setup looks - I have two systems talking to each other:
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        WORKSTATION                              │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  My Mac Host Machine                                    │   │
-│  │  - SSH Client (Terminal)                                │   │
-│  │  - Browser for testing web server                       │   │
-│  └─────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              │ SSH (Port 22)
-                              │ HTTP (Port 80)
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      SERVER (VirtualBox VM)                     │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  Ubuntu Server 24.04 LTS (Headless)                     │   │
-│  │  - SSH Server                                           │   │
-│  │  - Apache Web Server                                    │   │
-│  │  - MySQL Database                                       │   │
-│  └─────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-```
+![System Architecture Diagram](images/week1-architecture.svg)
 
 ## 2. Distribution Selection Justification
 
@@ -52,8 +30,8 @@ Here's how my setup looks - I have two systems talking to each other:
 
 **I went with Option C - Hybrid Approach**
 
-I'm using my Mac as the main workstation for administering the server:
-- **SSH Client:** The built-in Terminal app on macOS
+I'm using my Fedora 42 (XFCE) machine as the main workstation for administering the server:
+- **SSH Client:** The default Terminal emulator on XFCE
 - **File Transfer:** Using `scp` to copy files
 
 ## 4. Network Configuration
