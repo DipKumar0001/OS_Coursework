@@ -55,21 +55,7 @@ ssh -i ~/.ssh/os_course_key monkey@10.41.17.2
 
 The idea is "deny everything by default, then allow only what you need".
 
-```bash
-# Block all incoming traffic by default
-sudo ufw default deny incoming
-
-# Allow all outgoing
-sudo ufw default allow outgoing
-
-# Now punch holes for specific services
-sudo ufw allow ssh          # Port 22
-sudo ufw allow http         # Port 80 for Apache
-sudo ufw allow 3306/tcp     # MySQL port
-
-# Turn it on
-sudo ufw enable
-```
+![Firewall Configuration](images/firewallcofig.png)
 
 ### Checking the Rules
 ```bash
