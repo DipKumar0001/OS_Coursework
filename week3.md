@@ -63,8 +63,7 @@ sudo systemctl status apache2
 ![RAM Intensive Resource Usage](images/RAM-Intensive.png)
 
 ### I/O-Intensive (`fio`)
-*   **Expected Behavior:** High wait times (iowait), high Read/Write KB/s.
-*   **Monitoring Command:** `iostat -xz 1` (Detailed disk statistics)
+![IO Intensive Resource Usage](images/I/I/IO-Intensive.png)
 
 ### Network-Intensive (`iperf3`)
 *   **Expected Behavior:** Saturated network link (up to ~1Gbps on standard links). High packet rates.
