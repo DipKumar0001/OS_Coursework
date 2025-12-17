@@ -21,7 +21,7 @@ Next, I transferred the public key to the remote server.
 ![Copy Public Key](images/Screenshot%202025-12-17%20at%2018.15.42.png)
 
 ```bash
-ssh-copy-id -i ~/.ssh/os_course_key.pub dipesh@10.41.17.2
+ssh-copy-id -i ~/.ssh/os_course_key.pub monkey@10.41.17.2
 ```
 
 ### Step 3: Harden the SSH Config on the Server
@@ -47,7 +47,7 @@ Finally, I verified the connection works without a password.
 ![Test Connection](images/Screenshot%202025-12-17%20at%2019.31.47.png)
 
 ```bash
-ssh -i ~/.ssh/os_course_key dipesh@10.41.17.2
+ssh -i ~/.ssh/os_course_key monkey@10.41.17.2
 # No password prompt - it just connects!
 ```
 
