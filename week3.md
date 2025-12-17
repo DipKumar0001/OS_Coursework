@@ -69,8 +69,7 @@ sudo systemctl status apache2
 ![Network Intensive Resource Usage](images/Network-Intensive.png)
 
 ### Server Application (`apache2`)
-*   **Expected Behavior:** Variable CPU/RAM usage depending on request rate (simulated later with `ab`).
-*   **Monitoring Command:** `top` (General overview) and `tail -f /var/log/apache2/access.log` (Real-time traffic)
+![Server Application Resource Usage](images/Server_Application.png)
 
 ---
 [← Week 2](week2.md) | [Next: Week 4 →](week4.md)
