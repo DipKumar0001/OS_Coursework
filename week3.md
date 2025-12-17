@@ -59,17 +59,32 @@ sudo systemctl status apache2
 ### CPU-Intensive (`stress-ng`)
 ![CPU Intensive Resource Usage](images/CPU-intensive.png)
 
+**How I monitor this:**
+I use a tool called `mpstat` to watch my CPU. It shows me exactly how hard each processor core is working. If I see one core at 100%, I know the stress test is working.
+
 ### RAM-Intensive (`memtester`)
 ![RAM Intensive Resource Usage](images/RAM-Intensive.png)
+
+**How I monitor this:**
+I use `free -h` to see how much memory is being used in total. I also watch `vmstat` to see if the system runs out of RAM and starts using the hard drive (swap), which makes everything slow.
 
 ### I/O-Intensive (`fio`)
 ![IO Intensive Resource Usage](images/I/I/IO-Intensive.png)
 
+**How I monitor this:**
+I use `iostat` to check the hard drive speed. It tells me how much data is being read or written every second. High "iowait" numbers mean the CPU is stuck waiting for the disk to finish.
+
 ### Network-Intensive (`iperf3`)
 ![Network Intensive Resource Usage](images/Network-Intensive.png)
 
+**How I monitor this:**
+I use `iftop` or `ip` commands to watch network traffic. It's like a speedometer for the internet connection, showing exactly how many bits per second are moving in and out.
+
 ### Server Application (`apache2`)
 ![Server Application Resource Usage](images/Server_Application.png)
+
+**How I monitor this:**
+I use `top` to see the overall health of the server and `tail` to watch the access logs in real-time. This lets me see every request hitting the web server as it happens.
 
 ---
 [← Week 2](week2.md) | [Next: Week 4 →](week4.md)
