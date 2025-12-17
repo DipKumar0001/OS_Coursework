@@ -69,24 +69,7 @@ This setup creates a "Hybrid Approach" where I use a powerful, modern GUI workst
 *   **Storage:** 64 GB
 *   **vCPUs:** 2
 
-```bash
-$ ip addr show enp0s5
-2: enp0s5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 ...
-    inet 10.41.17.2/24 brd 10.41.17.255 scope global dynamic ...
-```
-
-```bash
-$ uname -a
-Linux server-01 6.8.0-31-generic #31-Ubuntu SMP x86_64 GNU/Linux
-
-$ free -h
-               total        used        free
-Mem:           3.8Gi       512Mi       2.1Gi
-
-$ lsb_release -a
-Distributor ID: Ubuntu
-Description:    Ubuntu 24.04 LTS
-```
+![System Specifications](images/week1commands.png)
 
 ## Reflection
 Setting up the VM took a bit of trial and error. Adding the second network adapter fixed internet access issues.
