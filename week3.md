@@ -66,8 +66,7 @@ sudo systemctl status apache2
 ![IO Intensive Resource Usage](images/I/I/IO-Intensive.png)
 
 ### Network-Intensive (`iperf3`)
-*   **Expected Behavior:** Saturated network link (up to ~1Gbps on standard links). High packet rates.
-*   **Monitoring Command:** `iftop` or `ip -s link show enp0s5`
+![Network Intensive Resource Usage](images/Network-Intensive.png)
 
 ### Server Application (`apache2`)
 *   **Expected Behavior:** Variable CPU/RAM usage depending on request rate (simulated later with `ab`).
