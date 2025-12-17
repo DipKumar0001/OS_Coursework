@@ -8,18 +8,26 @@ This was the week where I actually started implementing the security measures I 
 ## 1. SSH Configuration
 
 ### Step 1: Generate SSH Keys on my Mac
+I started by generating an Ed25519 SSH key pair on my local machine.
+![Generate SSH Keys](images/Screenshot%202025-12-17%20at%2018.15.27.png)
+
 ```bash
 ssh-keygen -t ed25519 -f ~/.ssh/os_course_key
 ```
 This creates a private key (stays on my Mac) and a public key (goes on the server).
 
 ### Step 2: Copy the Public Key to the Server
+Next, I transferred the public key to the remote server.
+![Copy Public Key](images/Screenshot%202025-12-17%20at%2018.15.42.png)
+
 ```bash
-ssh-copy-id -i ~/.ssh/os_course_key.pub dipesh@192.168.56.10
+ssh-copy-id -i ~/.ssh/os_course_key.pub dipesh@10.41.17.2
 ```
 
 ### Step 3: Harden the SSH Config on the Server
-I edited `/etc/ssh/sshd_config`:
+I edited `/etc/ssh/sshd_config` to disable root login and password authentication for better security.
+![Harden SSH Config](images/Screenshot%202025-12-17%20at%2019.27.45.png)
+
 ```bash
 PermitRootLogin no          # Can't log in as root anymore
 PasswordAuthentication no   # Must use key, no passwords
@@ -27,13 +35,19 @@ PubkeyAuthentication yes    # Enable key-based auth
 ```
 
 ### Step 4: Restart SSH
+After saving the changes, I restarted the SSH service to apply the new configuration.
+![Restart SSH](images/Screenshot%202025-12-17%20at%2019.31.02.png)
+
 ```bash
 sudo systemctl reload ssh
 ```
 
-**Testing it worked:**
+### Step 5: Testing it worked
+Finally, I verified the connection works without a password.
+![Test Connection](images/Screenshot%202025-12-17%20at%2019.31.47.png)
+
 ```bash
-ssh -i ~/.ssh/os_course_key dipesh@192.168.56.10
+ssh -i ~/.ssh/os_course_key dipesh@10.41.17.2
 # No password prompt - it just connects!
 ```
 
