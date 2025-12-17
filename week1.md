@@ -15,16 +15,28 @@ Here's how my setup looks - I have two systems talking to each other:
 
 **My Choice:** Ubuntu Server 24.04 LTS
 
-| Feature | Ubuntu Server 24.04 LTS | CentOS Stream | Debian Stable |
-| :--- | :--- | :--- | :--- |
-| **Package Manager** | APT - I'm already familiar with this | DNF - More common in enterprise | APT - Same as Ubuntu but older packages |
-| **Support** | 5 years of updates | Rolling release | Long support but older packages |
-| **Documentation** | Loads of tutorials online | Good but enterprise focused | Great but sometimes hard to follow |
+### Option Analysis
 
-**Why I picked Ubuntu:**
-- I've used Ubuntu Desktop before so the commands are familiar
-- There's so much help available online when I get stuck
-- The 5 year LTS means I won't have to worry about updates breaking things
+I evaluated four major server distributions based on Stability, Support, and Learning Curve.
+
+| Feature | Ubuntu Server 24.04 LTS | Debian Stable (12) | Rocky Linux 9 | Fedora Server 40 |
+| :--- | :--- | :--- | :--- | :--- |
+| **Release Model** | **LTS** (5 years standard, up to 12) | **Stable** (approx. 3 years) | **LTS** (10 years, RHEL clone) | **Rapid** (13 months, frequent updates) |
+| **Package Manager** | `apt` (user-friendly, vast repos) | `apt` (strict stable guidelines) | `dnf` (enterprise standard) | `dnf` (bleeding edge) |
+| **Software Age** | Balanced (stable but reasonably new) | Older (extremely stable) | Conservative (older, enterprise focused) | Very New (latest features) |
+| **Documentation** | **Excellent** (huge community, beginner friendly) | Good (wiki is technical) | Good (relies on RHEL docs) | Good (fast moving) |
+| **Use Case** | General Purpose / Cloud Standard | Core Infrastructure / Minimalist | Enterprise / Commercial Replacement | Developer / Testing New Tech |
+
+### Why chosen is best (Ubuntu Server LTS)
+
+I selected **Ubuntu Server 24.04 LTS** for this project. While alternatives like Rocky Linux offer "enterprise-grade" similarity to Red Hat, and Debian offers supreme rock-solid stability, Ubuntu strikes the perfect balance for a learning environment:
+
+1.  **Unmatched Community Support:** As I am learning, the ability to find "How to..." guides for Ubuntu is significantly easier than for any other distro. Almost every third-party tool has a repository or PPA specifically for Ubuntu.
+2.  **LTS Predictability:** The Long Term Support (LTS) model guarantees security updates for 5 years without forcing me to perform risky major upgrades. This allows me to build this coursework project and know it will remain secure and viable for years.
+3.  **Hardware/Hypervisor Compatibility:** Ubuntu has excellent out-of-the-box support for virtualized environments (like VirtualBox/VMware), often requiring less manual driver tweaking than Debian or CentOS streams.
+4.  **Familiarity:** Using `apt` and Debian-style config files reduces the friction of learning a new package manager (`dnf/yum`), allowing me to focus on the core OS concepts rather than syntax.
+
+**Conclusion:** Ubuntu Server removes the most friction from the learning process while providing a professional, industry-standard platform.
 
 ## 3. Workstation Configuration
 
