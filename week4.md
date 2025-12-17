@@ -53,7 +53,7 @@ ssh -i ~/.ssh/os_course_key monkey@10.41.17.2
 
 ## 2. Firewall Configuration
 
-The idea is "deny everything by default, then allow only what you need".
+The idea is "deny everything by default, then allow only SSH".
 
 ![Firewall Configuration](images/firewallcofig.png)
 
