@@ -64,10 +64,6 @@ This setup creates a "Hybrid Approach" where I use a powerful, modern GUI workst
 
 ## 5. System Specifications
 
-**Allocated Resources:**
-*   **RAM:** 4 GB
-*   **Storage:** 64 GB
-*   **vCPUs:** 2
 
 ![System Specifications](images/week1commands.png)
 
