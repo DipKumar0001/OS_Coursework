@@ -29,38 +29,45 @@ To test how well my server performs, I'm going to use a mix of different tools. 
 
 ## 2. Security Configuration Checklist
 
-Here's what I'm planning to configure:
+I have developed a comprehensive checklist to secure the server before deployment.
 
-| Area | What to Do | How to Do It | Done? |
+| Category | Security Measure | Configuration Detail | Status |
 | :--- | :--- | :--- | :--- |
-| SSH | Stop root from logging in directly | Change `PermitRootLogin no` in sshd_config | ☐ |
-| SSH | Only allow key-based login | Set `PasswordAuthentication no` | ☐ |
-| Firewall | Block everything except what I need | Use `ufw` to allow only SSH and web ports | ☐ |
-| Users | Create a normal admin account | Make a user and add to sudo group | ☐ |
-| Access Control | Limit what apps can do | Enable AppArmor profiles | ☐ |
-| Updates | Keep server patched automatically | Set up unattended-upgrades | ☐ |
-| Protection | Block attackers | Install fail2ban | ☐ |
+| **SSH Hardening** | Disable Root Login | `PermitRootLogin no` in `/etc/ssh/sshd_config` | ☐ |
+| **SSH Hardening** | Disable Password Auth | `PasswordAuthentication no` (Use Keys only) | ☐ |
+| **Firewall** | Minimize Attack Surface | `ufw default deny incoming`, `ufw allow ssh`, `ufw enable` | ☐ |
+| **Access Control** | File Permissions | `chmod 600` for SSH keys, strict ownership for web root | ☐ |
+| **Auto Updates** | Patch Management | Install and configure `unattended-upgrades` | ☐ |
+| **Privileges** | Principle of Least Privilege | Create non-root user; add to `sudo` group only if needed | ☐ |
+| **Network Security** | Brute Force Protection | Install `fail2ban` to ban repeated failed login IPs | ☐ |
+| **Network Security** | Port Scanning | Change default SSH port (Optional, decided to keep 22 for now) | ☐ |
 
 ## 3. Threat Model
 
-I tried to think like an attacker - what could go wrong with my server?
+Using the **STRIDE** methodology, I identified key threats to my system and designed mitigations for them.
 
-### STRIDE Methodology
-I used STRIDE which stands for Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, and Elevation of Privilege.
+### Threat 1: Unauthorized Remote Access (Spoofing/Elevation)
+*   **Description:** An attacker attempts to guess the root password or use stolen credentials to gain control of the server.
+*   **Impact:** Critical. Full system compromise.
+*   **Mitigation:** 
+    *   Disable root login completely.
+    *   Enforce SSH Key-based authentication (no passwords).
+    *   Implement Fail2Ban to block repeated attempts.
 
-### Threats I Identified
+### Threat 2: Service Vulnerability Exploitation (Tampering)
+*   **Description:** An attacker exploits a known bug in an outdated service (e.g., Apache or OpenSSL) to run malicious code.
+*   **Impact:** High. Could lead to data theft or server takeover.
+*   **Mitigation:**
+    *   Enable **Automatic Security Updates** to patch vulnerabilities daily.
+    *   Configure Firewall (`ufw`) to expose *only* necessary ports (22, 80, 443).
 
-**Threat 1: Someone pretending to be me (Spoofing)**
-- **What could happen:** An attacker could try to log in as admin
-- **How I'll prevent it:** Use SSH keys instead of passwords - much harder to crack. Also restrict which IPs can even connect.
-
-**Threat 2: Brute force attacks (Denial of Service)**
-- **What could happen:** Someone tries thousands of password combinations
-- **How I'll prevent it:** Install fail2ban to automatically block IPs that fail too many times
-
-**Threat 3: Compromised service taking over (Privilege Escalation)**
-- **What could happen:** If Apache or MySQL gets hacked, the attacker could try to get root access
-- **How I'll prevent it:** Use AppArmor to lock down what each service can access
+### Threat 3: Denial of Service (DoS)
+*   **Description:** An attacker floods the server with traffic or login requests, making it unresponsive for legitimate users.
+*   **Impact:** Medium. Service downtime.
+*   **Mitigation:**
+    *   Firewall rate limiting (`ufw limit ssh`).
+    *   Fail2Ban to ban aggressive IPs.
+    *   Resource monitoring (`mpstat`, `iftop`) to detect anomalies early.
 
 ## Reflection
 Writing out the security plan before doing anything felt a bit tedious at first, but it actually helped me understand WHY each security measure is important, not just HOW to do it.
