@@ -57,8 +57,7 @@ sudo systemctl status apache2
 ## 3. Expected Resource Usage & Monitoring Strategy
 
 ### CPU-Intensive (`stress-ng`)
-*   **Expected Behavior:** 100% usage on specified cores. High load average.
-*   **Monitoring Command:** `mpstat -P ALL 1` (Shows per-core usage every second)
+![CPU Intensive Resource Usage](images/CPU-intensive.png)
 
 ### RAM-Intensive (`memtester`)
 *   **Expected Behavior:** High User/System memory usage. Possible swap usage if pushed too far.
