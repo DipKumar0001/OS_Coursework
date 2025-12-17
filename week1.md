@@ -58,11 +58,22 @@ This setup creates a "Hybrid Approach" where I use a powerful, modern GUI workst
 
 | Setting | What I Set | Why |
 | :--- | :--- | :--- |
-| **Adapter 1** | NAT | So the server can get online |
-| **Adapter 2** | Host-Only | Creates a private network for SSH |
-| **Server IP** | 192.168.56.10 (static) | Fixed IP |
+| **Adapter Type** | **Bridged Adapter** | Connects VM directly to the physical network |
+| **Interface** | `enp0s5` | The primary network interface |
+| **IP Address** | `10.41.17.2/24` | Dynamic IP assigned by external DHCP |
 
 ## 5. System Specifications
+
+**Allocated Resources:**
+*   **RAM:** 4 GB
+*   **Storage:** 64 GB
+*   **vCPUs:** 2
+
+```bash
+$ ip addr show enp0s5
+2: enp0s5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 ...
+    inet 10.41.17.2/24 brd 10.41.17.255 scope global dynamic ...
+```
 
 ```bash
 $ uname -a
