@@ -55,7 +55,7 @@ ssh -i ~/.ssh/os_course_key monkey@10.41.17.2
 
 The idea is "deny everything by default, then allow only SSH".
 
-![Firewall Configuration](images/firewallcofig.png)
+![Firewall Configuration](images/firewallconfig.png)
 
 ### Checking the Rules
 ```bash
@@ -74,16 +74,7 @@ To                         Action      From
 
 I created a separate admin user instead of using root.
 
-```bash
-# Create the user
-sudo adduser admin_user
-
-# Give sudo access
-sudo usermod -aG sudo admin_user
-
-# Lock the root account
-sudo passwd -l root
-```
+![User Management](images/newuser.png)
 
 ## Reflection
 Setting up key-based SSH was a bit confusing at first. I accidentally locked myself out once when I disabled password auth before copying my key over! Had to use the VirtualBox console to fix it. Lesson learned - always test the key works before disabling passwords.
