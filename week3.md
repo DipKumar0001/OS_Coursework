@@ -1,95 +1,80 @@
-# Week 3: Application Selection for Performance Testing
+# Week 3: Phase 3 - Application Selection for Performance Testing
 
 [← Back to Home](index.md)
 
 ## Introduction
-This week I had to pick which applications I'd install on my server for performance testing. The goal was to choose apps that stress different parts of the system.
+This week focuses on selecting and installing the specific applications acting as workloads for our performance testing phase. I have selected a suite of industry-standard tools to isolate and stress specific system components.
 
-## 1. Application Selection Matrix
+## 1. Selected Applications
 
-I chose three applications that each put pressure on different system resources:
+| Resource | Application | Description | Why Selected |
+| :--- | :--- | :--- | :--- |
+| **CPU** | `stress-ng` | A comprehensive stress testing tool | Can generate specific types of CPU load (matrix math, crypto, etc.) |
+| **RAM** | `memtester` | Userspace memory tester | Effectively locks and tests specific amounts of RAM to simulate leaks or high usage |
+| **Disk I/O** | `fio` | Flexible I/O Tester | The gold standard for storage benchmarking; allows complex read/write pattern definition |
+| **Network** | `iperf3` | Network bandwidth measurement tool | Generates pure TCP/UDP traffic to measure maximum throughput |
+| **Server App** | `apache2` | Apache Web Server | Representative of a real-world web serving workload |
 
-| Application | What It Stresses | Why I Chose It |
-| :--- | :--- | :--- |
-| **Apache Web Server** | Network and CPU | It's the most popular web server and good for testing concurrent connections |
-| **MySQL Database** | Disk I/O and Memory | Databases are always reading and writing to disk |
-| **Sysbench** | Pure CPU | Just hammers the CPU with calculations, gives me a baseline |
+## 2. Installation Documentation (SSH-Based)
 
-## 2. Installation Documentation
+All installations are performed via SSH on the server (`dipesh@10.41.17.2`).
 
-Here's exactly how I installed each application through SSH:
-
-### Installing Apache Web Server
+### CPU & RAM Tools
 ```bash
-# First update the package list
+# Update package list first
 sudo apt update
 
+# Install stress-ng and memtester
+sudo apt install stress-ng memtester -y
+
+# Verify installations
+stress-ng --version
+man memtester > /dev/null && echo "memtester installed"
+```
+
+### I/O & Network Tools
+```bash
+# Install fio and iperf3
+sudo apt install fio iperf3 -y
+
+# Verify installations
+fio --version
+iperf3 --version
+```
+
+### Server Application (Apache)
+```bash
 # Install Apache
 sudo apt install apache2 -y
 
-# Check if it's running
-sudo systemctl status apache2
-
-# Allow it through the firewall
+# Allow traffic through firewall
 sudo ufw allow 'Apache'
+
+# Verify service status
+sudo systemctl status apache2
 ```
 
-### Installing MySQL Server
-```bash
-# Install MySQL
-sudo apt install mysql-server -y
+## 3. Expected Resource Usage & Monitoring Strategy
 
-# Run the security wizard
-sudo mysql_secure_installation
+### CPU-Intensive (`stress-ng`)
+*   **Expected Behavior:** 100% usage on specified cores. High load average.
+*   **Monitoring Command:** `mpstat -P ALL 1` (Shows per-core usage every second)
 
-# Check if it's running
-sudo systemctl status mysql
-```
+### RAM-Intensive (`memtester`)
+*   **Expected Behavior:** High User/System memory usage. Possible swap usage if pushed too far.
+*   **Monitoring Command:** `vmstat 1` and `free -h` (Monitors memory pages and usage)
 
-### Installing Sysbench
-```bash
-# Install sysbench
-sudo apt install sysbench -y
+### I/O-Intensive (`fio`)
+*   **Expected Behavior:** High wait times (iowait), high Read/Write KB/s.
+*   **Monitoring Command:** `iostat -xz 1` (Detailed disk statistics)
 
-# Check the version
-sysbench --version
-```
+### Network-Intensive (`iperf3`)
+*   **Expected Behavior:** Saturated network link (up to ~1Gbps on standard links). High packet rates.
+*   **Monitoring Command:** `iftop` or `ip -s link show enp0s5`
 
-## 3. Expected Resource Profiles
-
-Based on what I know about these applications:
-
-| Application | CPU | Memory | Disk | Network |
-| :--- | :--- | :--- | :--- | :--- |
-| Apache (idle) | Almost nothing | ~50MB | Nothing | Nothing |
-| Apache (busy) | High | Medium | Low | High |
-| MySQL (idle) | Almost nothing | ~300MB for caching | Nothing | Nothing |
-| MySQL (busy) | Medium | High | Very high | Low-Medium |
-| Sysbench CPU | 100% all cores | Low | Nothing | Nothing |
-
-## 4. Monitoring Strategy
-
-My plan for measuring performance:
-
-**Step 1: Get baseline numbers**
-```bash
-vmstat 1 300   # 5 minutes of readings
-```
-
-**Step 2: Run stress tests**
-```bash
-# For Apache
-ab -n 1000 -c 10 http://localhost/
-
-# For Sysbench
-sysbench cpu --cpu-max-prime=20000 run
-```
-
-**Step 3: Record everything**
-I'll save all the output to files so I can make graphs later.
-
-## Reflection
-Choosing applications wasn't too hard, but understanding WHAT resources they use was useful. I learned that different workloads stress different parts of the system.
+### Server Application (`apache2`)
+*   **Expected Behavior:** Variable CPU/RAM usage depending on request rate (simulated later with `ab`).
+*   **Monitoring Command:** `top` (General overview) and `tail -f /var/log/apache2/access.log` (Real-time traffic)
 
 ---
 [← Week 2](week2.md) | [Next: Week 4 →](week4.md)
