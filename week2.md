@@ -31,16 +31,7 @@ To test how well my server performs, I'm going to use a mix of different tools. 
 
 I have developed a comprehensive checklist to secure the server before deployment.
 
-| Category | Security Measure | Configuration Detail | Status |
-| :--- | :--- | :--- | :--- |
-| **SSH Hardening** | Disable Root Login | `PermitRootLogin no` in `/etc/ssh/sshd_config` | ☐ |
-| **SSH Hardening** | Disable Password Auth | `PasswordAuthentication no` (Use Keys only) | ☐ |
-| **Firewall** | Minimize Attack Surface | `ufw default deny incoming`, `ufw allow ssh`, `ufw enable` | ☐ |
-| **Access Control** | File Permissions | `chmod 600` for SSH keys, strict ownership for web root | ☐ |
-| **Auto Updates** | Patch Management | Install and configure `unattended-upgrades` | ☐ |
-| **Privileges** | Principle of Least Privilege | Create non-root user; add to `sudo` group only if needed | ☐ |
-| **Network Security** | Brute Force Protection | Install `fail2ban` to ban repeated failed login IPs | ☐ |
-| **Network Security** | Port Scanning | Change default SSH port (Optional, decided to keep 22 for now) | ☐ |
+![Security Configuration Checklist](images/week2_checklist.png)
 
 ## 3. Threat Model
 
