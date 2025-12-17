@@ -40,11 +40,19 @@ I selected **Ubuntu Server 24.04 LTS** for this project. While alternatives like
 
 ## 3. Workstation Configuration
 
-**I went with Option C - Hybrid Approach**
+**My Choice:** Fedora 42 Workstation
 
-I'm using my Fedora 42 (XFCE) machine as the main workstation for administering the server:
-- **SSH Client:** The default Terminal emulator on XFCE
-- **File Transfer:** Using `scp` to copy files
+I have chosen **Fedora 42** as my primary workstation for administering this project. This decision is based on its reputation as the premier developer-focused distribution.
+
+### Why Fedora 42?
+
+1.  **Cutting-Edge Technologies:** Fedora is known for being "First" (The 4 Fs: Freedom, Friends, Features, First). It adopts new technologies like Pipewire, Wayland, and the latest kernel versions before others, ensuring I have access to the most modern Linux stack available.
+2.  **Developer-Centric:** It treats developer tools as first-class citizens. Tools like `podman` (a daemonless Docker alternative) come pre-installed or are natively supported, making it an ideal environment for testing cloud-native applications.
+3.  **Pure GNOME Experience:** Fedora offers the most polished, unmodified GNOME desktop experience. This provides a distraction-free, keyboard-centric workflow that helps me focus on administration tasks.
+4.  **Admin Tools:** The availability of `virt-manager` works seamlessly out-of-the-box on Fedora, which is critical for managing my Ubuntu Server VM properly.
+
+**Relationship to Server:**
+This setup creates a "Hybrid Approach" where I use a powerful, modern GUI workstation (Fedora) to remotely manage a stable, conservative server (Ubuntu LTS) via SSH.
 
 ## 4. Network Configuration
 
