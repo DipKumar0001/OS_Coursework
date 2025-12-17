@@ -60,8 +60,7 @@ sudo systemctl status apache2
 ![CPU Intensive Resource Usage](images/CPU-intensive.png)
 
 ### RAM-Intensive (`memtester`)
-*   **Expected Behavior:** High User/System memory usage. Possible swap usage if pushed too far.
-*   **Monitoring Command:** `vmstat 1` and `free -h` (Monitors memory pages and usage)
+![RAM Intensive Resource Usage](images/RAM-Intensive.png)
 
 ### I/O-Intensive (`fio`)
 *   **Expected Behavior:** High wait times (iowait), high Read/Write KB/s.
