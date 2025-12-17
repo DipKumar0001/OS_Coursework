@@ -31,7 +31,7 @@ To test how well my server performs, I'm going to use a mix of different tools. 
 
 I have developed a comprehensive checklist to secure the server before deployment.
 
-![Security Configuration Checklist](images/week2_checklist.png)
+![Security Configuration Checklist](images/week2checklist.png)
 
 ## 3. Threat Model
 
