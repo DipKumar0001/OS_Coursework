@@ -65,6 +65,8 @@ sudo sysctl -p
 
 **Result:** Less disk I/O during memory spikes.
 
+![Swappiness Result](images/vmswap.png)
+
 ## Reflection
 Running the actual tests was fun - seeing the numbers go up in real-time with `htop` was interesting. I learned that tuning configurations for your specific workload really matters.
 
