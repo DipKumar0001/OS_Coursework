@@ -14,13 +14,7 @@ ab -n 5000 -c 50 http://localhost/
 This sends 5000 requests, with 50 happening at the same time.
 
 ### Results
-
-| What I Measured | Idle | Under Load | Difference |
-| :--- | :--- | :--- | :--- |
-| CPU Usage | 0.5% | 85% | Went up a lot! |
-| Memory Used | 320 MB | 450 MB | +130 MB |
-| Average Response Time | 2ms | 145ms | Much slower |
-| Requests per Second | N/A | 320 req/sec | N/A |
+![Apache Web Server Testing](images/%20Apache%20Web%20Server%20Testing.png)
 
 ### What This Tells Me
 The server handled 50 concurrent connections okay, but the CPU got really busy (85%). Memory stayed reasonable - the server has 4GB so 450MB is fine.
@@ -32,6 +26,8 @@ The main bottleneck is **CPU, not memory**.
 ```bash
 sysbench cpu --cpu-max-prime=20000 run
 ```
+
+![Sysbench CPU Test](images/sysbecnch.png)
 
 | What I Measured | Idle | Under Load |
 | :--- | :--- | :--- |
