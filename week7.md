@@ -16,11 +16,11 @@ sudo lynis audit system
 
 ### Results
 
-| Metric | Score in Week 4 | Score in Week 7 | Target |
-| :--- | :--- | :--- | :--- |
-| **Hardening Index** | 62 | **86** | Above 80 |
+### Results
 
-I went from 62 to 86! That's a big improvement.
+The screenshot below shows the detailed audit results and the final hardening index achieved.
+
+![Lynis Audit Result](images/lynisresult.png)
 
 ### What I Fixed to Improve the Score
 
