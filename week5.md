@@ -81,21 +81,78 @@ sudo systemctl restart fail2ban
 ## 4. Automation Scripts
 
 ### Script 1: security-baseline.sh
-This runs ON the server and checks if all security settings are correct:
-- UFW is active
-- SSH has root login and password auth disabled
-- AppArmor is running
-- Fail2ban is running
-- Unattended upgrades is active
+```bash
+#!/bin/bash
+# Shebang line specifying the script should be run with bash
+
+# --- UFW (Firewall) Check ---
+echo "Checking UFW Status..."
+# Check if UFW is active by searching for the "active" status string
+# 'sudo' is used for administrative privileges
+sudo ufw status | grep "Status: active"
+
+# --- SSH Security Check ---
+echo "Checking SSH Config..."
+# Check if Root Login is disabled in the SSH config file
+# 'grep' searches for the pattern inside /etc/ssh/sshd_config
+grep "PermitRootLogin no" /etc/ssh/sshd_config
+# Check if Password Authentication is disabled
+grep "PasswordAuthentication no" /etc/ssh/sshd_config
+
+# --- AppArmor Check ---
+echo "Checking AppArmor..."
+# Verify AppArmor status; 'aa-status' gives current profiles
+# 'sudo' needed for full status report
+sudo aa-status --enabled
+
+# --- Fail2ban Check ---
+echo "Checking Fail2ban..."
+# Check if the fail2ban service is currently active (running)
+systemctl is-active fail2ban
+
+# --- Unattended Upgrades Check ---
+echo "Checking Auto-Updates..."
+# Check if the unattended-upgrades configuration file exists
+ls /etc/apt/apt.conf.d/50unattended-upgrades
+```
 
 ![Security Baseline Script](images/baselinesecurity.png)
 
 ### Script 2: monitor-server.sh
-This runs FROM my Mac and connects to the server via SSH to grab stats:
-- Load average
-- Memory usage
-- Disk space
-- Open network connections
+```bash
+#!/bin/bash
+# Shebang line specifying bash interpreter
+
+# Define the target server variable for reuse
+# format: user@ip_address
+SERVER="monkey@10.41.17.2"
+
+echo "Connecting to $SERVER to gather statistics..."
+
+# Connect via SSH and run the following block of commands remotely
+# -t forces pseudo-tty allocation (optional but good for some commands)
+ssh -t $SERVER '
+    # --- Check System Load ---
+    echo "--- System Load (Uptime) ---"
+    # Print system uptime and load averages
+    uptime
+
+    # --- Check Memory Usage ---
+    echo "--- Memory Usage ---"
+    # Display memory usage in human-readable format (-h)
+    free -h
+
+    # --- Check Disk Space ---
+    echo "--- Disk Space ---"
+    # Show disk usage for all filesystems in human-readable format
+    df -h
+
+    # --- Check Network Connections ---
+    echo "--- Open Listening Ports ---"
+    # Show socket statistics (-s), listening sockets (-l), TCP (-t), numeric (-n)
+    ss -ltn
+'
+```
 
 ![Monitor Server Script](images/monitorsstatus.png)
 
