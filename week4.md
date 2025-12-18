@@ -58,9 +58,16 @@ ssh -i ~/.ssh/os_course_key monkey@10.41.17.2
 
 ## 2. Firewall Documentation
 
-The following screenshot documents the complete ruleset applied to the firewall, implementing a "deny all incoming by default" policy except for specific ports.
+The following screenshot documents the complete ruleset applied to the firewall. I implemented a strict policy that only allows SSH connections from my specific workstation IP (10.41.17.1), significantly reducing the attack surface.
 
 ![Firewall Documentation - Complete Ruleset](images/firewallconfig.png)
+
+### Firewall Configuration Commands
+I used the following command to restrict SSH access:
+
+```bash
+sudo ufw allow form 10.41.17.1 to any port 22
+```
 
 ### Checking the Rules
 ```bash
@@ -70,14 +77,25 @@ Default: deny (incoming), allow (outgoing)
 
 To                         Action      From
 --                         ------      ----
-22/tcp                     ALLOW IN    Anywhere
+22/tcp                     ALLOW IN    10.41.17.1
 80/tcp                     ALLOW IN    Anywhere
 3306/tcp                   ALLOW IN    Anywhere
 ```
 
 ## 3. Remote Administration Evidence (User Management)
 
-As part of remote administration, I created a separate admin user to avoid using root for daily tasks. The screenshot below demonstrates the execution of these commands via the remote SSH session.
+As part of remote administration, I created a separate admin user to avoid using root for daily tasks. I also added this user to the `sudo` group for administrative privileges.
+
+### User Creation Commands
+```bash
+# Create new user
+sudo adduser newadmin
+
+# Add to sudo group
+sudo usermod -aG sudo newadmin
+```
+
+The screenshot below demonstrates the execution of these commands via the remote SSH session.
 
 ![Remote Administration - User Creation](images/newuser.png)
 
