@@ -42,6 +42,8 @@ This is expected - sysbench is designed to max out the CPU.
 
 **Problem:** Default Apache uses `mpm_prefork` which creates a new process for every connection.
 
+![MPM Memory Usage](images/memoryuses.png)
+
 **What I changed:**
 ```bash
 sudo a2dismod mpm_prefork
