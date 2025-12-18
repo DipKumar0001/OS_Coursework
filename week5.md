@@ -15,6 +15,7 @@ Ubuntu Server 24.04 already has AppArmor enabled by default!
 # Check AppArmor status
 sudo aa-status
 ```
+![AppArmor Status](images/appmorr.png)
 
 Output showed:
 - 34 profiles loaded
@@ -34,6 +35,9 @@ I configured `unattended-upgrades` to automatically install security patches.
 sudo apt install unattended-upgrades
 sudo dpkg-reconfigure unattended-upgrades
 ```
+
+![Automatic Security Configuration](images/automatic%20security.png)
+![Unattended Upgrades Status](images/unattended-upgrade%20status.png)
 
 Config file at `/etc/apt/apt.conf.d/50unattended-upgrades`:
 ```bash
@@ -72,6 +76,8 @@ bantime = 3600
 sudo systemctl restart fail2ban
 ```
 
+![Fail2ban Status](images/fail2ban_status.png)
+
 ## 4. Automation Scripts
 
 ### Script 1: security-baseline.sh
@@ -82,12 +88,16 @@ This runs ON the server and checks if all security settings are correct:
 - Fail2ban is running
 - Unattended upgrades is active
 
+![Security Baseline Script](images/baselinesecurity.png)
+
 ### Script 2: monitor-server.sh
 This runs FROM my Mac and connects to the server via SSH to grab stats:
 - Load average
 - Memory usage
 - Disk space
 - Open network connections
+
+![Monitor Server Script](images/monitorsstatus.png)
 
 ## Reflection
 Fail2ban is really clever - I tested it by deliberately failing SSH logins and watched my IP get banned! Had to wait an hour or manually unban myself.
