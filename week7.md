@@ -47,12 +47,8 @@ nmap -sV -p- 192.168.56.10
 ```
 
 ### Results
-```text
-PORT     STATE SERVICE VERSION
-22/tcp   open  ssh     OpenSSH 8.9p1 Ubuntu
-80/tcp   open  http    Apache httpd 2.4.52
-3306/tcp open  mysql   MySQL 8.0.36
-```
+### Results
+![Nmap Scan Result](images/networknmap.png)
 
 Only 3 ports are open - exactly what I configured in UFW. Everything else is blocked.
 
